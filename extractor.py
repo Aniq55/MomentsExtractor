@@ -27,8 +27,21 @@ while(vid.isOpened() and CURRENT_FRAME<TOTAL_FRAMES):
 # Analysis
 
 # print(detect)
-activityFrame= detect.index(True)+1
 print activityFrame
+
+prev= detect(0)
+
+MARK_BEGIN= []
+MARK_END= []
+for this_frame in range(1, TOTAL_FRAMES):
+	if prev=False and this_frame=True:
+		MARK_BEGIN.append(this_frame)
+	if prev= True and this_frame= False:
+		MARK_END.append(this_frame)
+
+print(MARK_BEGIN)
+print(MARK_END)
+
 
 # Grouping
 
