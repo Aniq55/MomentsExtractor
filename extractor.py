@@ -3,8 +3,8 @@ import cv2
 
 vid= cv2.VideoCapture('videos/05_05.mp4')
 
-# TOTAL_FRAMES= vid.get(7) #38599
-TOTAL_FRAMES= 5000
+TOTAL_FRAMES= int(vid.get(7)) #38599
+# TOTAL_FRAMES= 5000
 FPS= vid.get(5)
 
 cascadeUpperBody = cv2.CascadeClassifier("cascades/haarcascade_upperbody.xml")
