@@ -2,9 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-file= open("output.txt", "r")
-
-TOTAL_FRAMES= 5000
+file= open("meta.txt", "r")
+TOTAL_FRAMES= 38599
 WIDTH= 200
 THRESHOLD= 80
 
