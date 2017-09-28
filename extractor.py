@@ -27,8 +27,6 @@ while(vid.isOpened() and CURRENT_FRAME<TOTAL_FRAMES):
 
 # Analysis
 
-# print(detect)
-# print activityFrame
 
 prev= detect[0]
 
