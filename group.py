@@ -3,9 +3,12 @@ Author: Github/@Aniq55
 '''
 
 import numpy as np
+import cv2
 
+filename= input()
+vid= cv2.VideoCapture(filename)
 
-TOTAL_FRAMES= 38599
+TOTAL_FRAMES= int(vid.get(7))
 WIDTH= 200
 THRESHOLD= 80
 

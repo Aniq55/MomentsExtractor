@@ -5,7 +5,8 @@ Author: Github/@Aniq55
 import numpy as np
 import cv2
 
-vid= cv2.VideoCapture('videos/05_05.mp4')
+filename= input()
+vid= cv2.VideoCapture(filename)
 
 TOTAL_FRAMES= int(vid.get(7))
 FPS= vid.get(5)
