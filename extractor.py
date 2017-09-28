@@ -1,16 +1,24 @@
+'''
+Author: Github/@Aniq55
+'''
+
 import numpy as np
 import cv2
 
 vid= cv2.VideoCapture('videos/05_05.mp4')
 
-TOTAL_FRAMES= int(vid.get(7)) #38599
-# TOTAL_FRAMES= 5000
+TOTAL_FRAMES= int(vid.get(7))
 FPS= vid.get(5)
 
 cascadeUpperBody = cv2.CascadeClassifier("cascades/haarcascade_upperbody.xml")
 
 detect= []
 np.array(detect, np.bool)
+
+
+###############
+## DETECTION ##
+###############
 
 CURRENT_FRAME=0
 while(vid.isOpened() and CURRENT_FRAME<TOTAL_FRAMES):
@@ -23,15 +31,17 @@ while(vid.isOpened() and CURRENT_FRAME<TOTAL_FRAMES):
 		detect.append(True)
 	else:
 		detect.append(False)
-	
 
-# Analysis
 
+##############
+## ANALYSIS ##
+##############
 
 prev= detect[0]
 
 MARK_BEGIN= []
 MARK_END= []
+
 for this_frame in range(1, TOTAL_FRAMES):
 	if prev== False and detect[this_frame]== True:
 		MARK_BEGIN.append(this_frame)
@@ -39,15 +49,9 @@ for this_frame in range(1, TOTAL_FRAMES):
 		MARK_END.append(this_frame)
 	prev= detect[this_frame]
 
-# print(MARK_BEGIN)
-# print(MARK_END)
-
-
-
 file= open("meta.txt", "w")
 
-
-THRESHOLD= 0
+THRESHOLD= 0	# Can be increased to filter noise
 
 samples= len(MARK_END)
 for j in range(samples):
@@ -56,6 +60,5 @@ for j in range(samples):
 		file.write(str(MARK_BEGIN[j])+' -- '+str(MARK_END[j])+'\n')	
 
 file.close()
-
 vid.release()
 cv2.destroyAllWindows()
