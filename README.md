@@ -6,6 +6,7 @@ __Required:__ _Generate and store a list of timestamps `t_start - t_end` in a fi
 
 ## Solution
 * We first extract the possibly interesting moments by the script `extractor.py` and store the time-stamps in the file `meta.txt`
+* The detection of human presence is done through __haarcascade__. Here, the __upper_body__ haarcascade is used.
 * These timestamps are then analyzed for grouping based on the parameters `WIDTH` and `THRESHOLD` using the script `group.py`
 * The groups formed are expanded to include the neighbors close to the interesting durations
 * The time-durations are then checked for overlap, if overlap is present, then the multiple time-intervals are reduced to one.
@@ -33,5 +34,7 @@ python3 group.py
 ```
 On completion, an `output.txt` is  generated.
 
+### Visualization
+![alt text](https://github.com/Aniq55/MomentsExtractor/blob/master/tests/test_W200_T80.png)
 
 This project was assigned by: saurav@getalice.co 
