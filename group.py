@@ -29,31 +29,43 @@ for t in range(TOTAL_FRAMES - WIDTH):
 # plt.stem(list(range(TOTAL_FRAMES)), x2)
 
 
-x3=x2
-for t in range(200,len(x2)-200):
-	if x2[t]==0.5:
-		x3[t-200:t]=0.25
-		x3[t:t+200]=0.25
 
-prev= x3[0]
+prev= x2[0]
 
 MARK_BEGIN= []
 MARK_END= []
 for this_frame in range(1, TOTAL_FRAMES):
-	if prev== 0 and x3[this_frame]== 0.25:
+	if prev== 0 and x2[this_frame]== 0.5:
 		MARK_BEGIN.append(this_frame)
-	if prev==0.25 and x3[this_frame]== 0:
+	if prev==0.5 and x2[this_frame]== 0:
 		MARK_END.append(this_frame)
-	prev= x3[this_frame]
+	prev= x2[this_frame]
 
-
-# plt.stem(list(range(TOTAL_FRAMES)), x3, 'red')
 
 
 file2= open("output.txt", "w")
-
+t_begin=[]
+t_end= []
 samples= len(MARK_END)
 for j in range(samples):
-	a= MARK_BEGIN[j]/25
-	b= MARK_END[j]/25
-	file2.write(str(int(a/60))+':'+str(int(a%60)) +' - '+ str(int(b/60))+':'+str(int(b%60)) +'\n')	
+	t_begin.append(MARK_BEGIN[j]/25 +5)
+	t_end.append(MARK_END[j]/25 + 20)
+	# file2.write(str(int(a/60))+':'+str(int(a%60)) +' - '+ str(int(b/60))+':'+str(int((b)%60)) +'\n')	
+
+j=1
+L=0
+while j< samples- L-1:
+	if t_begin[j]< t_end[j-1]+5:
+		del(t_begin[j])
+		del(t_end[j-1])
+		L=1
+	j=j+1
+
+samples= len(MARK_END)
+for j in range(samples-L-1):
+	a= t_begin[j]
+	b= t_end[j]
+	s_a= int(a%60)
+	s_b= int(b%60)
+	x= "%02d:%02d - %02d:%02d \n" %(a/60,s_a, b/60,s_b)	
+	file2.write(x)
